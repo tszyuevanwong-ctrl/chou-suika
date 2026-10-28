@@ -226,12 +226,13 @@
         master = actx.createGain();
         master.gain.value = 0.85;
         if (actx.createDynamicsCompressor) {
+          /* gentle brickwall: leaves a single sound untouched, catches overlaps */
           var comp = actx.createDynamicsCompressor();
-          comp.threshold.value = -14;
-          comp.knee.value = 22;
-          comp.ratio.value = 8;
+          comp.threshold.value = -3;
+          comp.knee.value = 0;
+          comp.ratio.value = 20;
           comp.attack.value = 0.003;
-          comp.release.value = 0.2;
+          comp.release.value = 0.16;
           master.connect(comp); comp.connect(actx.destination);
         } else {
           master.connect(actx.destination);
